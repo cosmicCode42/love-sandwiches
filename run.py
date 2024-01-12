@@ -91,8 +91,9 @@ def get_last_5_entries_sales():
     as a list of lists.
     """
     sales = SHEET.worksheet("sales")
-    column_list = [sales.col_values(i+1) for i in range(6)]
-    pprint(column_list)
+    column_list = [sales.col_values(i)[-5:] for i in range(1, 7)]
+
+    return column_list
 
 
 def main():
