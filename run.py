@@ -112,10 +112,13 @@ def calculate_stock_data(data):
 
 
 def get_stock_values(data):
-    headings = [SHEET.worksheet("stock").col_values(i)[0] for i in range (1, 7)]
-    stock_values = data
-    stock_dict = {heading:stock for heading, stock in zip(headings, stock_values)}
-    print(f"Make the following numbers of sandwiches for next market:\n\n{stock_dict}")
+    """
+    Print out the calculated stock numbers for each sandwich type.
+    """
+    headings = SHEET.worksheet("stock").row_values(1)
+    print("Make the following numbers of sandwiches for next market:\n")
+    stock_dict = {heading:stock for heading, stock in zip(headings, data)}
+    print(stock_dict)
 
 
 def main():
