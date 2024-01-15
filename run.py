@@ -106,8 +106,16 @@ def calculate_stock_data(data):
     Puts each result in a new list and returns the list.
     """
     print("Calculating stock data...\n")
-    projected_stock_row_list = [round((sum([int(num) for num in list]) / 5) * 1.1) for list in data]
+    projected_stock_row_list = [round((sum([int(num) for 
+                                num in list]) / 5) * 1.1) for list in data]
     return projected_stock_row_list
+
+
+def get_stock_values(data):
+    headings = [SHEET.worksheet("stock").col_values(i)[0] for i in range (1, 7)]
+    stock_values = data
+    stock_dict = {heading:stock for heading, stock in zip(headings, stock_values)}
+    print(f"Make the following numbers of sandwiches for next market:\n\n{stock_dict}")
 
 
 def main():
@@ -120,6 +128,7 @@ def main():
     update_worksheet(new_surplus_data, "surplus")
     projected_stock_data = calculate_stock_data(get_last_5_entries_sales())
     update_worksheet(projected_stock_data, "stock")
+    get_stock_values(projected_stock_data)
 
 
 print("Welcome to Love Sandwiches data automation!\n")
